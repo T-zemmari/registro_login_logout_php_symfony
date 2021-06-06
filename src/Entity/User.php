@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -35,6 +36,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $web;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -43,6 +49,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getEmail(): ?string
     {
         return $this->email;
+    }
+    public function getUsername():?string
+    {
+        return $this->username;
     }
 
     public function setEmail(string $email): self
@@ -114,5 +124,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getWeb(): ?string
+    {
+        return $this->web;
+    }
+
+    public function setWeb(?string $web): self
+    {
+        $this->web = $web;
+
+        return $this;
     }
 }
